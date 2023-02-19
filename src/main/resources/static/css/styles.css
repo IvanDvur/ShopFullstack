@@ -1,0 +1,27 @@
+.col{
+
+}
+.card-title{
+    font-size: large;
+}
+.card-text{
+    font-size: small;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+.card{
+    border-style: hidden;
+}
+#topNavbar{
+    background: darkred;
+}
+#bottomNavbar{
+    background: black;
+}
+.nav-link{
+    color: white;
+}
