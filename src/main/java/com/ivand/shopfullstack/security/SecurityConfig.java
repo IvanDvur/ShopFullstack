@@ -4,6 +4,7 @@ import com.ivand.shopfullstack.model.Client;
 import com.ivand.shopfullstack.repository.ClientRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,8 +38,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeRequests()
-                    .mvcMatchers("/design", "/cart").hasRole("USER")
+                .authorizeHttpRequests()
+                    .mvcMatchers("/cart").hasRole("USER")
+                    .mvcMatchers(HttpMethod.POST, "/main/add").hasRole("USER")
                     .anyRequest().permitAll()
                 .and()
                     .formLogin()

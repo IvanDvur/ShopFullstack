@@ -1,7 +1,6 @@
 package com.ivand.shopfullstack.model;
 
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -9,10 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -36,12 +32,12 @@ public class Client implements UserDetails {
     private final String state;
     private final String zip;
     private final String phoneNumber;
-    private final  String roles;
-
+    private final String roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> rolesList = new ArrayList<>();
+        assert roles != null;
         Arrays.stream(roles.split(",")).forEach(r -> {
             GrantedAuthority role = new SimpleGrantedAuthority("ROLE_" + r);
             rolesList.add(role);

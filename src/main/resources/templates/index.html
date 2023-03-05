@@ -9,7 +9,6 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/styles.css">
-
 </head>
 <body>
 <header class="navbar-expand">
@@ -18,10 +17,10 @@
       <div class="col-auto p-0">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Мужчинам</a>
+            <a class="nav-link" th:href="@{/main/male}">Мужчинам</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Женщинам</a>
+            <a class="nav-link" th:href="@{/main/female}">Женщинам</a>
           </li>
         </ul>
       </div>
@@ -37,7 +36,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Корзина</a>
+            <a class="nav-link" th:href="@{/cart}">Корзина</a>
           </li>
         </ul>
       </div>
@@ -48,29 +47,47 @@
           <a class="nav-link dropdown" href="#">Новинки</a>
         </li>
         <li class="nav-item dropdown show">
-          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdown-clothes"
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" role="button" id="dropdown-clothes"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
             Одежда
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdown-clothes">
-            <a class="dropdown-item" th:each="item:${outerwear}" th:text="${item.name}" href="#">Action</a>
+            <a class="dropdown-item" th:each="item:${outerwear}" th:text="${item.name}"
+               th:href="@{${baseUrl}+'/'+${item.name}}">Action</a>
           </div>
         </li>
-
         <li class="nav-item dropdown show">
           <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdown-shoes"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Обувь
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdown-shoes">
-            <a class="dropdown-item" href="#" th:each="item:${shoes}" th:text="${item.name}">Placeholder</a>
+            <a class="dropdown-item" th:each="item:${shoes}" th:text="${item.name}"
+               th:href="@{${baseUrl}+'/'+${item.name}}"
+            >Placeholder</a>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Аксессуары</a>
+        <li class="nav-item dropdown show">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdown-accessories"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Аксессуары
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdown-accessories">
+            <a class="dropdown-item" th:each="item:${accessories}" th:text="${item.name}"
+               th:href="@{${baseUrl}+'/'+${item.name}}"
+            >Placeholder</a>
+          </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Нижнее бельё</a>
+        <li class="nav-item dropdown show">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdown-underwear"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Нижнее бельё
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdown-underwear">
+            <a class="dropdown-item" th:each="item:${underwear}" th:text="${item.name}"
+               th:href="@{${baseUrl}+'/'+${item.name}}"
+            >Placeholder</a>
+          </div>
         </li>
       </ul>
     </div>
@@ -115,7 +132,7 @@
         <p class="card-text" th:text="${item.description}">
           Some quick example text to build on the card title.
         </p>
-        <a href="#" class="btn btn-primary">+</a>
+        <a th:method="post" th:action="@{/main/add(product = ${item})}" class="btn btn-primary">+</a>
       </div>
     </div>
   </div>
@@ -134,3 +151,4 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+

@@ -1,5 +1,5 @@
 package com.ivand.shopfullstack.model;
 
 public enum ClothesType {
-    OUTERWEAR,SHOES,ACCESSORIES,PANTS
+    OUTERWEAR,SHOES,ACCESSORIES,UNDERWEAR
 }

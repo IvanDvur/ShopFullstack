@@ -1,5 +1,6 @@
 package com.ivand.shopfullstack.model;
 
+import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.*;
@@ -10,12 +11,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Data
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cartId;
 
-    @ManyToOne
+    @OneToOne
     private Client client;
 
     @NotBlank(message = "Необходимо указать имя адресата")

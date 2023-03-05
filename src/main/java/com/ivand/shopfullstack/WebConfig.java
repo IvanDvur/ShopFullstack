@@ -65,6 +65,7 @@ public class WebConfig implements WebMvcConfigurer {
             crocs1.setCategory(crocs);
             crocs1.setName("Crocs1");
             crocs1.setDescription("An amazing crocs");
+            crocs1.setSex("female");
 
             productRepository.save(sneaker1);
             productRepository.save(loafer1);
