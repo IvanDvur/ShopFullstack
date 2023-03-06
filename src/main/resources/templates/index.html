@@ -125,16 +125,17 @@
 
 <div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-    <div class="card rounded-0 mt-1 px-2" th:each="item:${products}">
+    <form class="card rounded-0 mt-1 px-2" method="post" th:action="@{/main/add/{id}(id=${item.getId()})}"
+          th:each="item:${products}">
       <img class="card-img-top" src="/img/duetddoskonaly.jpg" alt="Card image cap">
       <div class="card-body">
         <h4 class="card-title" th:text="${item.name}">Card title</h4>
         <p class="card-text" th:text="${item.description}">
-          Some quick example text to build on the card title.
+          No Description
         </p>
-        <a th:method="post" th:action="@{/main/add(product = ${item})}" class="btn btn-primary">+</a>
+        <button type="submit" class="btn btn-dark">Добавить</button>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
