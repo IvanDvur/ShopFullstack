@@ -20,9 +20,9 @@ public class Product {
 
     private String sex;
 
-    private Double price;
+    private Integer price;
 
-    private Double oldPrice;
+    private Integer oldPrice;
 
     private Boolean discount;
 
@@ -34,7 +34,7 @@ public class Product {
     @JoinColumn(name="product_type_id")
     private Category category;
 
-    public Product(String name, String description, String sex, Double price, Double oldPrice, Boolean discount,
+    public Product(String name, String description, String sex, Integer price, Integer oldPrice, Boolean discount,
                    Boolean hotProduct, String image, Category category) {
         this.name = name;
         this.description = description;

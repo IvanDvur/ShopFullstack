@@ -26,12 +26,25 @@
         <label for="hot" class="form-label">Горячее</label>
         <input type="checkbox" name="hotProduct" class="form-check-inline" placeholder="Горячее" id="hot"><br>
         <input type="file" name="image" class="form-control" placeholder="Изображение товара" id="image"><br>
+        <select class="form-select" name="category">
+          <option selected>Выбрать категорию</option>
+          <option th:each="item:${shoes}" th:text="${item.name}"></option>
+          <option th:each="item:${outerwear}" th:text="${item.name}"></option>
+          <option th:each="item:${accessories}" th:text="${item.name}"></option>
+        </select>
         <input type="submit" class="btn btn-outline-success" value="Добавить товар">
       </form>
     </div>
     <div class="col-md-6 text-center">
       <h4>Добавить Категорию</h4>
-
+      <form method="post" th:action="@{/admin/addCategory}">
+        <select class="form-select" name="type">
+          <option selected>Выберите категорию</option>
+          <option th:each="type:${types}" th:text="${type.name()}"></option>
+        </select><br>
+        <input type="text" class="form-control" placeholder="Название подкатегории" name="name"><br>
+        <input type="submit" class="btn btn-primary" value="Добавить категорию">
+      </form>
     </div>
   </div>
 </div>
