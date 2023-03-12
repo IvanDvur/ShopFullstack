@@ -103,7 +103,7 @@
 </header>
 <div class="container">
 <h2 class="text" style="margin-top: 2rem" th:if="${cart.getProducts().size()==0}">Ваша корзина пуста!</h2>
-<div class="row" style="margin-top: 2rem;margin-bottom: 2rem;padding-bottom: 2rem;border-bottom: #4f5050 1px solid" th:each="item:${cart.getProducts()}">
+<form class="row" method="post" th:action="@{/cart/{id}(id=${item.getId()})}" style="margin-top: 2rem;margin-bottom: 2rem;padding-bottom: 2rem;border-bottom: #4f5050 1px solid" th:each="item:${cart.getProducts()}">
   <div class="col-3 text-start">
     <h4 th:text="${item.name}"></h4>
   </div>
@@ -114,9 +114,9 @@
     <h4 th:text="${item.price}+'₽'"></h4>
   </div>
   <div class="col-3 text-end">
-    <button class="btn btn-danger">Удалить</button>
+    <button type="submit" class="btn btn-danger">Удалить</button>
   </div>
-</div>
+</form>
   <div class="row">
     
   </div>

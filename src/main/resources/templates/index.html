@@ -39,7 +39,8 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleDropdownFormPassword1">Password</label>
-                  <input type="password" name="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Пароль">
+                  <input type="password" name="password" class="form-control" id="exampleDropdownFormPassword1"
+                         placeholder="Пароль">
                 </div>
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="dropdownCheck">
@@ -160,14 +161,23 @@
 </div>
 <!-----------------------------------------ОСНОВНОЕ СОДЕРЖИМОЕ(КАРТОЧКИ ТОВАРОВ)--------------------------------------->
 <div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6">
     <form class="card rounded-0 mt-1 px-2" method="post" th:action="@{/main/add/{id}(id=${item.getId()})}"
           th:each="item:${products}">
       <img class="card-img-top" src="/img/duetddoskonaly.jpg" alt="Card image cap">
       <div class="card-body">
-        <h4 class="card-title" th:text="${item.name}">Card title</h4>
         <div class="row">
-          <h5 th:text="${item.price}+'₽'"></h5>
+          <div class="col">
+            <h5 th:text="${item.name}"></h5>
+          </div>
+          <div class="col">
+            <h6 th:text="${item.price}+'Р'"></h6>
+          </div>
+          <div class="col-6">
+          </div>
+          <div class="col" style="color: gray;text-decoration: line-through">
+            <h6 th:text="${item.getOldPrice()}+'Р'"></h6>
+          </div>
         </div>
         <button type="submit" class="btn btn-dark">Добавить</button>
       </div>

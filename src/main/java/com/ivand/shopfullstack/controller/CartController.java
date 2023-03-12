@@ -2,8 +2,8 @@ package com.ivand.shopfullstack.controller;
 
 import com.ivand.shopfullstack.model.Cart;
 import com.ivand.shopfullstack.model.Client;
-import com.ivand.shopfullstack.repository.CartRepository;
-import com.ivand.shopfullstack.repository.ClientRepository;
+import com.ivand.shopfullstack.service.CartService;
+import com.ivand.shopfullstack.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,44 +20,34 @@ import java.security.Principal;
 @SessionAttributes("cart")
 public class CartController {
 
-    private CartRepository cartRepository;
-    private ClientRepository clientRepository;
+    private CartService cartService;
+    private ClientService clientService;
 
-    public CartController(CartRepository cartRepository, ClientRepository clientRepository) {
-        this.cartRepository = cartRepository;
-        this.clientRepository = clientRepository;
+    public CartController(ClientService clientService, CartService cartService) {
+        this.cartService = cartService;
+        this.clientService = clientService;
     }
 
     @GetMapping
-    public String showCartPage(){
+    public String showCartPage() {
         return "cart";
     }
 
     @ModelAttribute(name = "client")
-    public Client client(Principal principal){
-        if(principal ==null){
-            return null;
-        }
-        String username = principal.getName();
-        Client client = clientRepository.findByUsername(username);
-        return client;
+    public Client client(Principal principal) {
+        return clientService.resolveClient(principal);
     }
 
-    public void deleteProductFromCart(){
-
+    @PostMapping("/{id}")
+    public String deleteProductFromCart(@PathVariable(name = "id") Long id,
+                                        @SessionAttribute(name = "cart") Cart cart) {
+        return cartService.deleteProductFromCart(id, cart);
     }
 
     @PostMapping
     public String processOrder(@Valid @ModelAttribute("cart") Cart cart, Errors errors, SessionStatus sessionStatus,
-                               @AuthenticationPrincipal Client client){
-        if(errors.hasErrors()){
-            return "cart";
-        }
-        cart.setClient(client);
-        log.info("Processing order {}",cart);
-        cartRepository.save(cart);
-        sessionStatus.setComplete();
-        return "redirect:/";
+                               @AuthenticationPrincipal Client client) {
+        return cartService.processOrder(cart, errors, sessionStatus, client);
     }
 
 }

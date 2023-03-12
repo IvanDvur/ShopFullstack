@@ -42,8 +42,15 @@
           <option selected>Выберите категорию</option>
           <option th:each="type:${types}" th:text="${type.name()}"></option>
         </select><br>
-        <input type="text" class="form-control" placeholder="Название подкатегории" name="name"><br>
+        <input type="text" class="form-control" placeholder="Название подкатегории" name="name"><br><span></span>
         <input type="submit" class="btn btn-primary" value="Добавить категорию">
+      </form>
+    </div>
+    <div class="row text-center">
+      <h4>Удалить Продукт</h4>
+      <input type="text" th:value="${id}" class="form-control" placeholder="Id продукта"><br>
+      <form method="post" th:action="@{/admin/delete/{id}(id = ${id})}">
+        <input type="submit" class="btn btn-danger" value="Удалить продукт">
       </form>
     </div>
   </div>
